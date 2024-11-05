@@ -5,13 +5,16 @@ Clean GGM Webserver
 ├─ .env.example
 ├─ controller
 │  ├─ blogController.js
+│  ├─ commandController.js
 │  ├─ contactController.js
+│  ├─ controllers.js
 │  ├─ eventController.js
 │  ├─ pageController.js
 │  └─ userController.js
 ├─ entity
 │  ├─ application.js
 │  ├─ blog-post.js
+│  ├─ command.js
 │  ├─ company.js
 │  ├─ event.js
 │  ├─ lead.js
@@ -21,6 +24,7 @@ Clean GGM Webserver
 │  ├─ ride-request.js
 │  ├─ social-handle.js
 │  └─ user.js
+├─ entity.zip
 ├─ framework
 │  ├─ database
 │  │  └─ dbRepository.js
@@ -73,9 +77,11 @@ Clean GGM Webserver
 ├─ router
 │  └─ v1
 │     ├─ blogRouter.js
+│     ├─ commandRouter.js
 │     ├─ contactRouter.js
 │     ├─ eventRouter.js
 │     ├─ pageRouter.js
+│     ├─ routers.js
 │     └─ userRouter.js
 ├─ use-case
 │  ├─ blog
@@ -86,6 +92,11 @@ Clean GGM Webserver
 │  │  ├─ getAllPosts.js
 │  │  ├─ getPost.js
 │  │  └─ orderPosts.js
+│  ├─ command
+│  │  ├─ createSiteMap.js
+│  │  ├─ minifyAll.js
+│  │  ├─ minifyCSS.js
+│  │  └─ minifyJS.js
 │  ├─ contact
 │  │  ├─ createLead.js
 │  │  ├─ sendMessage.js
@@ -98,6 +109,7 @@ Clean GGM Webserver
 │  │  ├─ editEvent.js
 │  │  ├─ getAllEvents.js
 │  │  └─ getEvent.js
+│  ├─ use-cases.js
 │  └─ user
 │     ├─ createUser.js
 │     ├─ deleteUser.js
