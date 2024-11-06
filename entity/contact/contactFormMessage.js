@@ -1,5 +1,5 @@
-import { EntityError } from "../utility/error-handling/EntityError.js";
-import { emailValidation, phoneNumberValidation } from "../utility/validation/entityValidation.js";
+import { EntityError } from "../../utility/error-handling/EntityError.js";
+import { emailValidation, phoneNumberValidation } from "../../utility/validation/entityValidation.js";
 
 export class ContactFormMessage {
     constructor(reason, first_name, last_name, email, phone_number, preferred_contact_method, message) {

@@ -1,5 +1,5 @@
-import { EntityError } from "../utility/error-handling/EntityError.js";
-import { emailValidation, phoneNumberValidation } from "../utility/validation/entityValidation.js";
+import { EntityError } from "../../utility/error-handling/EntityError.js";
+import { emailValidation, phoneNumberValidation } from "../../utility/validation/entityValidation.js";
 
 // class Attachments {
 //     constructor(filename, content, path, href, headers, httpHeaders, contentType) {
