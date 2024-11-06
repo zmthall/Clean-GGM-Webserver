@@ -12,18 +12,26 @@ Clean GGM Webserver
 │  ├─ pageController.js
 │  └─ userController.js
 ├─ entity
-│  ├─ application.js
-│  ├─ blog-post.js
-│  ├─ command.js
-│  ├─ company.js
-│  ├─ event.js
-│  ├─ lead.js
-│  ├─ message.js
-│  ├─ navigation.js
-│  ├─ page.js
-│  ├─ ride-request.js
-│  ├─ social-handle.js
-│  └─ user.js
+│  ├─ blog
+│  │  └─ blogPost.js
+│  ├─ command
+│  │  └─ command.js
+│  ├─ contact
+│  │  ├─ application.js
+│  │  ├─ contactFormMessage.js
+│  │  ├─ lead.js
+│  │  ├─ message.js
+│  │  └─ rideRequest.js
+│  ├─ entitites.js
+│  ├─ event
+│  │  └─ event.js
+│  ├─ page
+│  │  ├─ company.js
+│  │  ├─ navigation.js
+│  │  ├─ page.js
+│  │  └─ socialHandle.js
+│  └─ user
+│     └─ user.js
 ├─ entity.zip
 ├─ framework
 │  ├─ database
@@ -120,8 +128,20 @@ Clean GGM Webserver
    ├─ backend-helpers
    │  ├─ minification.js
    │  └─ siteMapping.js
-   └─ page-helpers
-      ├─ getPageBreadcrumb.js
-      └─ getPageInformation.js
+   ├─ data-manipulation
+   │  └─ string-helpers.js
+   ├─ error-handling
+   │  ├─ controllerError.js
+   │  ├─ entityError.js
+   │  ├─ frameworkError.js
+   │  └─ useCaseError.js
+   ├─ page-helpers
+   │  ├─ getPageBreadcrumb.js
+   │  └─ getPageInformation.js
+   ├─ response
+   │  ├─ errorResponse.js
+   │  └─ successResponse.js
+   └─ validation
+      └─ entityValidation.js
 
 ```
