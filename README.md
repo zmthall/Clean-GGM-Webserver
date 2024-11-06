@@ -3,41 +3,106 @@
 Clean GGM Webserver
 ├─ .env
 ├─ .env.example
-├─ controller
-│  ├─ blogController.js
-│  ├─ commandController.js
-│  ├─ contactController.js
-│  ├─ controllers.js
-│  ├─ eventController.js
-│  ├─ pageController.js
-│  └─ userController.js
-├─ entity
-│  ├─ blog
-│  │  └─ blogPost.js
-│  ├─ command
-│  │  └─ command.js
-│  ├─ contact
-│  │  ├─ application.js
-│  │  ├─ contactFormMessage.js
-│  │  ├─ lead.js
-│  │  ├─ message.js
-│  │  └─ rideRequest.js
-│  ├─ entitites.js
-│  ├─ event
-│  │  └─ event.js
-│  ├─ page
-│  │  ├─ company.js
-│  │  ├─ navigation.js
-│  │  ├─ page.js
-│  │  └─ socialHandle.js
-│  └─ user
-│     └─ user.js
+├─ back-end
+│  ├─ controller
+│  │  ├─ blogController.js
+│  │  ├─ commandController.js
+│  │  ├─ contactController.js
+│  │  ├─ controllers.js
+│  │  ├─ eventController.js
+│  │  ├─ pageController.js
+│  │  └─ userController.js
+│  ├─ entity
+│  │  ├─ blog
+│  │  │  └─ blogPost.js
+│  │  ├─ command
+│  │  │  └─ command.js
+│  │  ├─ company
+│  │  │  └─ company.js
+│  │  ├─ contact
+│  │  │  ├─ application.js
+│  │  │  ├─ contactFormMessage.js
+│  │  │  ├─ lead.js
+│  │  │  ├─ message.js
+│  │  │  └─ rideRequest.js
+│  │  ├─ entitites.js
+│  │  ├─ event
+│  │  │  └─ event.js
+│  │  ├─ page
+│  │  │  ├─ navigation.js
+│  │  │  ├─ page.js
+│  │  │  └─ socialHandle.js
+│  │  └─ user
+│  │     └─ user.js
+│  ├─ framework
+│  │  ├─ database
+│  │  │  └─ dbRepository.js
+│  │  └─ memory
+│  │     └─ inMemoryRepository.js
+│  ├─ index.js
+│  ├─ middleware
+│  │  ├─ authentication
+│  │  │  └─ authenticateSubmission.js
+│  │  └─ logging
+│  │     ├─ errorLog.js
+│  │     └─ submissionLog.js
+│  ├─ router
+│  │  └─ v1
+│  │     ├─ blogRouter.js
+│  │     ├─ commandRouter.js
+│  │     ├─ contactRouter.js
+│  │     ├─ eventRouter.js
+│  │     ├─ pageRouter.js
+│  │     ├─ routers.js
+│  │     └─ userRouter.js
+│  ├─ use-case
+│  │  ├─ blog
+│  │  │  ├─ addPost.js
+│  │  │  ├─ archivePost.js
+│  │  │  ├─ deletePost.js
+│  │  │  ├─ editPost.js
+│  │  │  ├─ getAllPosts.js
+│  │  │  ├─ getPost.js
+│  │  │  └─ orderPosts.js
+│  │  ├─ command
+│  │  │  ├─ createSiteMap.js
+│  │  │  ├─ minifyAll.js
+│  │  │  ├─ minifyCSS.js
+│  │  │  └─ minifyJS.js
+│  │  ├─ contact
+│  │  │  ├─ createLead.js
+│  │  │  ├─ sendMessage.js
+│  │  │  ├─ submitApplication.js
+│  │  │  └─ submitRideRequest.js
+│  │  ├─ event
+│  │  │  ├─ addEvent.js
+│  │  │  ├─ archiveEvent.js
+│  │  │  ├─ deleteEvent.js
+│  │  │  ├─ editEvent.js
+│  │  │  ├─ getAllEvents.js
+│  │  │  └─ getEvent.js
+│  │  ├─ use-cases.js
+│  │  └─ user
+│  │     ├─ createUser.js
+│  │     ├─ deleteUser.js
+│  │     └─ loginUser.js
+│  └─ utility
+│     ├─ authentication
+│     │  └─ authenticateSubmission.js
+│     ├─ backend-helpers
+│     │  ├─ minification.js
+│     │  └─ siteMapping.js
+│     ├─ error-handling
+│     │  ├─ controllerError.js
+│     │  ├─ entityError.js
+│     │  ├─ frameworkError.js
+│     │  └─ useCaseError.js
+│     ├─ response
+│     │  ├─ errorResponse.js
+│     │  └─ successResponse.js
+│     └─ validation
+│        └─ entityValidation.js
 ├─ entity.zip
-├─ framework
-│  ├─ database
-│  │  └─ dbRepository.js
-│  └─ memory
-│     └─ inMemoryRepository.js
 ├─ front-end
 │  ├─ public
 │  │  ├─ files
@@ -49,6 +114,11 @@ Clean GGM Webserver
 │  │     ├─ blogStyles.css
 │  │     ├─ contactStyles.css
 │  │     └─ policyStyles.css
+│  ├─ router
+│  ├─ utility
+│  │  └─ page-helpers
+│  │     ├─ getPageBreadcrumb.js
+│  │     └─ getPageInformation.js
 │  └─ views
 │     ├─ components
 │     │  └─ forms
@@ -74,74 +144,7 @@ Clean GGM Webserver
 │     └─ policies
 │        ├─ accessibility.ejs
 │        └─ privacy-policy.ejs
-├─ index.js
-├─ middleware
-│  ├─ authentication
-│  │  └─ authenticateSubmission.js
-│  └─ logging
-│     ├─ errorLog.js
-│     └─ submissionLog.js
 ├─ README.md
-├─ router
-│  └─ v1
-│     ├─ blogRouter.js
-│     ├─ commandRouter.js
-│     ├─ contactRouter.js
-│     ├─ eventRouter.js
-│     ├─ pageRouter.js
-│     ├─ routers.js
-│     └─ userRouter.js
-├─ use-case
-│  ├─ blog
-│  │  ├─ addPost.js
-│  │  ├─ archivePost.js
-│  │  ├─ deletePost.js
-│  │  ├─ editPost.js
-│  │  ├─ getAllPosts.js
-│  │  ├─ getPost.js
-│  │  └─ orderPosts.js
-│  ├─ command
-│  │  ├─ createSiteMap.js
-│  │  ├─ minifyAll.js
-│  │  ├─ minifyCSS.js
-│  │  └─ minifyJS.js
-│  ├─ contact
-│  │  ├─ createLead.js
-│  │  ├─ sendMessage.js
-│  │  ├─ submitApplication.js
-│  │  └─ submitRideRequest.js
-│  ├─ event
-│  │  ├─ addEvent.js
-│  │  ├─ archiveEvent.js
-│  │  ├─ deleteEvent.js
-│  │  ├─ editEvent.js
-│  │  ├─ getAllEvents.js
-│  │  └─ getEvent.js
-│  ├─ use-cases.js
-│  └─ user
-│     ├─ createUser.js
-│     ├─ deleteUser.js
-│     └─ loginUser.js
-└─ utility
-   ├─ authentication
-   │  └─ authenticateSubmission.js
-   ├─ backend-helpers
-   │  ├─ minification.js
-   │  └─ siteMapping.js
-   ├─ data-manipulation
-   │  └─ string-helpers.js
-   ├─ error-handling
-   │  ├─ controllerError.js
-   │  ├─ entityError.js
-   │  ├─ frameworkError.js
-   │  └─ useCaseError.js
-   ├─ page-helpers
-   │  ├─ getPageBreadcrumb.js
-   │  └─ getPageInformation.js
-   ├─ response
-   │  ├─ errorResponse.js
-   │  └─ successResponse.js
-   └─ validation
-      └─ entityValidation.js
+└─ server.js
 
 ```
