@@ -1,5 +1,5 @@
 import { EntityError } from "../../utility/error-handling/EntityError.js";
-import { emailValidation, phoneNumberValidation } from "../../utility/validation/entityValidation.js";
+import { emailValidation } from "../../utility/validation/entityValidation.js";
 
 // class Attachments {
 //     constructor(filename, content, path, href, headers, httpHeaders, contentType) {
@@ -58,7 +58,7 @@ import { emailValidation, phoneNumberValidation } from "../../utility/validation
 
 export class Message {
     constructor({from, to, cc = null, bcc = null, subject, text, html, attachments = null}) {
-        if(this.validateFrom(from)) this.from = from;
+        if(emailValidation(from)) this.from = from;
         if(this.validateTo(to)) this.to = to;
         if(this.validateCC(cc)) this.cc = cc;
         if(this.validateBCC(bcc)) this.bcc = bcc;
@@ -68,22 +68,15 @@ export class Message {
         if(this.validateAttachments(attachments)) this.attachments = attachments;
     }
 
-    validateFrom(from) {
-        if(!(typeof from === 'string' && from.length !== 0 && emailValidation(from))) 
-            throw new EntityError('From needs to be of type string, it cannot be empty or undefined, and it must be in proper email format.');
-
-        return true;
-    }
-
     validateTo(to) {
-        if(!(Array.isArray(to) && to.length >= 1 && to.every(item => typeof item === 'string' && item.length > 0 && item.length <= 100 && emailValidation(item))))
+        if(!(Array.isArray(to) && to.length >= 1 && to.every(item => emailValidation(item))))
             throw new EntityError('To needs to be an array of strings with at least 1 element inside, all of the elements need to be of type string, they cannot be empty or undefined, they must be less than 100 characters in length, and they must be in proper email format.');
 
         return true;
     }
 
     validateCC(cc) {
-        if(!(Array.isArray(cc) && cc.every(item => typeof item === 'string' && item.length > 0 && item.length <= 100 && emailValidation(item))))
+        if(!(Array.isArray(cc) && cc.every(item => emailValidation(item))))
             throw new EntityError('CC needs to be an array of strings, all of the elements need to be of type string, they cannot be empty or undefined, they must be less than 100 characters in length, and they must be in proper email format.');
 
         if(cc === null) return false;
@@ -91,8 +84,8 @@ export class Message {
     }
 
     validateBCC(bcc) {
-        if(!(Array.isArray(bcc) && bcc.every(item => typeof item === 'string' && item.length > 0 && item.length <= 100 && emailValidation(item))))
-            throw new EntityError('CC needs to be an array of strings, all of the elements need to be of type string, they cannot be empty or undefined, they must be less than 100 characters in length, and they must be in proper email format.');
+        if(!(Array.isArray(bcc) && bcc.every(item => emailValidation(item))))
+            throw new EntityError('BCC needs to be an array of strings, all of the elements need to be of type string, they cannot be empty or undefined, they must be less than 100 characters in length, and they must be in proper email format.');
 
         if(bcc === null) return false;
         else return true;
