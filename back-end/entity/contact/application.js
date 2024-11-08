@@ -40,9 +40,17 @@ class WorkInformation {
 
 export class Application {
     constructor(position, personalInformation, driverInformation = null, workInformation) {
+        if(this.validatePosition(position)) this.position = position;
         if(this.validatePersonalInformation(personalInformation)) this.personalInformation = personalInformation;
         if(driverInformation && this.validateDriverInformation(driverInformation)) this.driverInformation = driverInformation;
-        if(this.validateWorkInformation(workInformation)) this.workInformation = workInformation
+        if(this.validateWorkInformation(workInformation)) this.workInformation = workInformation;
+    }
+
+    validatePosition(position) {
+        if(!(typeof position === 'string' && position.length !== 0))
+            throw new EntityError('Position must needs to be of type string and it cannot be empty or undefined.');
+
+        return true;
     }
 
     validatePersonalInformation(personalInformation) {
