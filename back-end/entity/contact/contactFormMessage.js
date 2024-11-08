@@ -2,7 +2,7 @@ import { EntityError } from "../../utility/error-handling/EntityError.js";
 import { firstNameValidation, lastNameValidation, emailValidation, phoneNumberValidation } from "../../utility/validation/entityValidation.js";
 
 export class ContactFormMessage {
-    constructor({reason, first_name, last_name, email, phone_number = null, preferred_contact_method, message}) {
+    constructor({ reason, first_name, last_name, email, phone_number = null, preferred_contact_method, message }) {
         if(this.validateReason(reason)) this.reason = reason;
         if(firstNameValidation(first_name)) this.first_name = first_name;
         if(lastNameValidation(last_name)) this.last_name = last_name;

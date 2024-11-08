@@ -39,3 +39,103 @@ export function lastNameValidation(last_name) {
 
     return true;
 }
+
+// ID needs to be of type number and must be an integer type number.
+export function idValidation(id) {
+    if(!(typeof id === 'number' && Number.isInteger(id))) 
+        throw new EntityError('ID needs to be of type number and must be an integer type number.');
+
+    return true;
+}
+
+export function dateValidation(dateString) {
+    // Regular expression to check format MM/DD/YYYY or MM-DD-YYYY
+    const regex = /^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](\d{4})$/;
+    
+    // Check if the date matches the format
+    if (!regex.test(dateString)) {
+        throw new EntityError('Date needs to be in the format of MM/DD/YYYY or MM-DD-YYYY.');
+    }
+    
+    // Extract month, day, and year from the date string
+    const [_, month, day, year] = dateString.match(regex).map(Number);
+
+    // Define the number of days in each month
+    const daysInMonth = {
+        1: [31, 'January'],  // January
+        2: [isLeapYear(year) ? 29 : 28, 'February'], // February
+        3: [31, 'March'],  // March
+        4: [30, 'April'],  // April
+        5: [31, 'May'],  // May
+        6: [30, 'June'],  // June
+        7: [31, 'July'],  // July
+        8: [31, 'August'],  // August
+        9: [30, 'September'],  // September
+        10: [31, 'October'], // October
+        11: [30, 'November'], // November
+        12: [31, 'December']  // December
+    };
+    // Check if the day is valid for the given month and year
+    if(day <= daysInMonth[month][0]) return true;
+    else throw new EntityError(`${daysInMonth[month][1]} only has ${daysInMonth[month][0]} days. Entered value: ${day}`);
+}
+
+export function timeValidation(timeString) {
+    // Time needs to be of string type and it cannot be empty or undefined.
+    if(!(typeof timeString === 'string' && timeString.length !== 0))
+        throw new EntityError('Time needs to be of string type and it cannot be empty or undefined.');
+
+    // Regular expression to validate time formats that meet the following criteria:
+    // 12-hour format with AM/PM (e.g., 02:30 AM, 11:59 PM)
+    // 24-hour format without AM/PM (e.g., 14:30, 23:59)
+    const regex = /^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$|^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    
+    if(!regex.text(timeString)) throw new EntityError('Time needs be in a 12-hour time format or a 24-hour time format.');
+
+    return true;
+}
+
+export function addressValidation(addressString) {
+    if(!(typeof addressString === 'string' && addressString !== 0 && addressString.length <= 150))
+        throw new EntityError('Address needs to be of string type, it cannot be empty or undefined, and it must be less than or equal to 150 characters.')
+    
+    return true;
+}
+
+export function contentValidation(content, name = null, minLength = 1, maxLength = 500) {
+    if(!(typeof name == 'string' && name !== null))
+        throw new Entity
+        
+    if(!(typeof content === 'string' && content.length >= minLength && content.length <= maxLength))
+        throw new EntityError(`Content[${name}] needs to be of type string and it cannot be empty and must be ${minLength} to ${maxLength} characters.`);
+
+    return true;
+}
+
+// This function takes in an array of radioValues and tests them to the 
+export function radioValidation(radioValueArr, section = null, trueValue = 'yes', falseValue = 'no') {
+    if(!(Array.isArray(radioValueArr)))
+        throw new EntityError(`Radio Value Arr in ${section} must an Array.`)
+
+    radioValueArr.forEach(value => {
+        if(!(typeof value === 'string' && (value === trueValue || value === falseValue)))
+            throw new EntityError(`Radio[${section}] values need to be of type string and can only be ${trueValue} or ${falseValue}.`);
+    });
+    
+    return true;
+}
+
+// A file needs to be an instance of File entity and if placed in arguments, the fileType must be what is accepted and nothing else.
+export function fileValidation(file, acceptedFileType = null) {
+    if(Array.isArray(file))
+        throw new EntityError('File cannot be an array.'); // Maybe in the future checking an array can be placed but individual checking makes more sense.
+    
+    if(!(file instanceof File))
+        throw new EntityError('File needs to be of type File.'); // File has to be an instance of entity File
+
+    if(acceptedFileType) 
+        if(!(acceptedFileType.every(type => type === file.fileExtension)))
+            throw new EntityError(`The file cannot be of file extension ${file.fileExtension}.`);
+
+    return acceptedFileType;
+}
