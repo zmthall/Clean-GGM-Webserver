@@ -22,16 +22,13 @@ Clean GGM Webserver
 │  │  ├─ contact
 │  │  │  ├─ application.js
 │  │  │  ├─ contactFormMessage.js
+│  │  │  ├─ file.js
 │  │  │  ├─ lead.js
 │  │  │  ├─ message.js
 │  │  │  └─ rideRequest.js
 │  │  ├─ entitites.js
 │  │  ├─ event
 │  │  │  └─ event.js
-│  │  ├─ page
-│  │  │  ├─ navigation.js
-│  │  │  ├─ page.js
-│  │  │  └─ socialHandle.js
 │  │  └─ user
 │  │     └─ user.js
 │  ├─ framework
@@ -104,6 +101,15 @@ Clean GGM Webserver
 │        └─ entityValidation.js
 ├─ entity.zip
 ├─ front-end
+│  ├─ controller
+│  │  └─ pageController.js
+│  ├─ entity
+│  │  └─ page
+│  │     ├─ navigation.js
+│  │     ├─ page.js
+│  │     └─ socialHandle.js
+│  ├─ framework
+│  │  └─ app.js
 │  ├─ public
 │  │  ├─ files
 │  │  ├─ images
@@ -115,6 +121,7 @@ Clean GGM Webserver
 │  │     ├─ contactStyles.css
 │  │     └─ policyStyles.css
 │  ├─ router
+│  ├─ use-case
 │  ├─ utility
 │  │  └─ page-helpers
 │  │     ├─ getPageBreadcrumb.js
