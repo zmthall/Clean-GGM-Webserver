@@ -4,12 +4,12 @@ import { Buffer } from 'node:buffer';
 export class File {
     constructor({fieldname, originalname, encoding, mimetype, buffer, size}, maxSize = null, acceptedFileType = null) {
         if(this.isString(fieldname)) this.fieldname = fieldname;
-        if(this.isString(originalname)) this.originalname = originalname;
-        if(this.isString(encoding)) this.encoding = encoding;
-        if(this.isString(mimetype)) {
-            this.mimetype = mimetype;
+        if(this.isString(originalname)) {
+            this.originalname = originalname;
             this.fileExtension = this.getFileExtension(originalname);
-        }
+        } 
+        if(this.isString(encoding)) this.encoding = encoding;
+        if(this.isString(mimetype)) this.mimetype = mimetype;
         if(this.validateBuffer(buffer)) this.buffer = buffer;
         if(this.validateSize(size)) this.size = size;
     }
