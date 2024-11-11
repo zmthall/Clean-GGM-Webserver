@@ -16,7 +16,7 @@ import { RideRequest } from "./contact/rideRequest";
 import { Event } from "./event/event";
 
 // User Entities
-import { User } from "./user/user";
+// import { User } from "./user/user"; // This has not been implemented yet.
 
 export {
     BlogPost,
