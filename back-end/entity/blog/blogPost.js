@@ -1,5 +1,5 @@
 import { EntityError } from "../../utility/error-handling/EntityError";
-import { contentValidation, dateValidation, idValidation } from "../../utility/validation/entityValidation";
+import { creationDateValidation, dateValidation, idValidation } from "../../utility/validation/entityValidation";
 
 export class BlogPost {
     constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date = (new Date()).toISOString() }) {
@@ -9,7 +9,7 @@ export class BlogPost {
         if(contentValidation(content, 'Blog Post Content', 1, 10000)) this.content = content;
         if(image_url && this.validateImageURL(image_url)) this.image_url = image_url;
         if(tags && this.validateTags(tags)) this.tags = tags;
-        if(dateValidation(creation_date)) this.creation_date = creation_date;
+        if(creationDateValidation(creation_date)) this.creation_date = creation_date;
     }
 
     // Image URL needs to be a URL class. Only 1 image allowed per post.

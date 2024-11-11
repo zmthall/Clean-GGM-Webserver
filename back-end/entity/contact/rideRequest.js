@@ -3,7 +3,7 @@ import { idValidation, firstNameValidation, lastNameValidation, dateValidation, 
 
 
 class PassengerInformation {
-    constructor(id, first_name, last_name, date_of_birth, phone_number, email, medicaid_id) {
+    constructor(id, first_name, last_name, date_of_birth, phone_number, email, medicaid_id, creation_date) {
         if(idValidation(id)) this.id = id;
         if(firstNameValidation(first_name)) this.first_name = first_name;
         if(lastNameValidation(last_name)) this.last_name = last_name;

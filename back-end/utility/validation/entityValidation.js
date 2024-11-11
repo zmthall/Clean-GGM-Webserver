@@ -49,8 +49,8 @@ export function idValidation(id) {
 }
 
 export function dateValidation(dateString) {
-    // Regular expression to check format {YYYY/MM/DD}T{Hours}:{Minutes}:{Seconds}:{Milliseconds}Z
-    const regex = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
+    // Regular expression to check format MM/DD/YYYY or MM-DD-YYYY
+    const regex = /^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](\d{4})$/;
     
     // Check if the date matches the format
     if (!regex.test(dateString)) {
@@ -58,7 +58,39 @@ export function dateValidation(dateString) {
     }
     
     // Extract month, day, and year from the date string
-    const [_, year, month, day] = dateString.match(regex).map(Number);
+    const [_, month, day, year] = dateString.match(regex).map(Number);
+
+    // Define the number of days in each month
+    const daysInMonth = {
+        1: [31, 'January'],  // January
+        2: [isLeapYear(year) ? 29 : 28, 'February'], // February
+        3: [31, 'March'],  // March
+        4: [30, 'April'],  // April
+        5: [31, 'May'],  // May
+        6: [30, 'June'],  // June
+        7: [31, 'July'],  // July
+        8: [31, 'August'],  // August
+        9: [30, 'September'],  // September
+        10: [31, 'October'], // October
+        11: [30, 'November'], // November
+        12: [31, 'December']  // December
+    };
+    // Check if the day is valid for the given month and year
+    if(day <= daysInMonth[month][0]) return true;
+    else throw new EntityError(`${daysInMonth[month][1]} only has ${daysInMonth[month][0]} days. Entered value: ${day}`);
+}
+
+export function creationDateValidation(ISOdateString) {
+    // Regular expression to check format {YYYY/MM/DD}T{Hours}:{Minutes}:{Seconds}:{Milliseconds}Z
+    const regex = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
+    
+    // Check if the date matches the format
+    if (!regex.test(ISOdateString)) {
+        throw new EntityError('Date needs to be in the format of MM/DD/YYYY or MM-DD-YYYY.');
+    }
+    
+    // Extract month, day, and year from the date string
+    const [_, year, month, day] = ISOdateString.match(regex).map(Number);
 
     // Define the number of days in each month
     const daysInMonth = {
