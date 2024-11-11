@@ -1,4 +1,4 @@
-import { EntityError } from "../error-handling/EntityError";
+import { EntityError } from "../error-handling/EntityError.js";
 
 // Email must be a string, it cannot be empty/undefined, and it must be less that 100 characters.
 // An email must also pass the regex expression making sure it is in proper email format.
@@ -103,8 +103,8 @@ export function addressValidation(addressString) {
 }
 
 export function contentValidation(content, name = null, minLength = 1, maxLength = 500) {
-    if(!(typeof name == 'string' && name !== null))
-        throw new Entity
+    if(!(name && typeof name == 'string' && name.length !== 0))
+        throw new EntityError('Content name needs to be of type string and it cannot be empty or undefined.')
         
     if(!(typeof content === 'string' && content.length >= minLength && content.length <= maxLength))
         throw new EntityError(`Content[${name}] needs to be of type string and it cannot be empty and must be ${minLength} to ${maxLength} characters.`);
