@@ -18,7 +18,7 @@ import { Event } from "./event/event";
 // User Entities
 // import { User } from "./user/user"; // This has not been implemented yet.
 
-export {
+export const entities = {
     BlogPost,
     Command,
     Application,
