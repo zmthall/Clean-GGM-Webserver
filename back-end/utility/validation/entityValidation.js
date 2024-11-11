@@ -42,15 +42,15 @@ export function lastNameValidation(last_name) {
 
 // ID needs to be of type number and must be an integer type number.
 export function idValidation(id) {
-    if(!(typeof id === 'number' && Number.isInteger(id))) 
-        throw new EntityError('ID needs to be of type number and must be an integer type number.');
+    if(!(typeof id === 'string' && id.length > 10)) 
+        throw new EntityError('ID needs to be of type string and must be longer than 10 characters.');
 
     return true;
 }
 
 export function dateValidation(dateString) {
-    // Regular expression to check format MM/DD/YYYY or MM-DD-YYYY
-    const regex = /^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](\d{4})$/;
+    // Regular expression to check format {YYYY/MM/DD}T{Hours}:{Minutes}:{Seconds}:{Milliseconds}Z
+    const regex = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
     
     // Check if the date matches the format
     if (!regex.test(dateString)) {
@@ -58,7 +58,7 @@ export function dateValidation(dateString) {
     }
     
     // Extract month, day, and year from the date string
-    const [_, month, day, year] = dateString.match(regex).map(Number);
+    const [_, year, month, day] = dateString.match(regex).map(Number);
 
     // Define the number of days in each month
     const daysInMonth = {
