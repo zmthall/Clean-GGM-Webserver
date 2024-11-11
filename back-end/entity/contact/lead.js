@@ -9,10 +9,13 @@ export class Lead {
         if(emailValidation(email)) this.email = email;
         if(phoneNumberValidation(phone_number)) this.phone_number = phone_number;
 
-        this.validateRequired(email, phone_number)
+        this.validateRequired(email, phone_number);
     }
 
     validateRequired(email, phone_number) {
-        if(email === null && phone_number === null) throw new EntityError('A lead has to have either an email or a phone number. Both cannot be empty or undefinied.')
+        if(email === null && phone_number === null) 
+            throw new EntityError('A lead has to have either an email or a phone number. Both cannot be empty or undefinied.');
+
+        return true;
     }
 }

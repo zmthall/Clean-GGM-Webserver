@@ -56,6 +56,8 @@ class WorkInformation {
     validatePreferredPayRate(preferred_pay_rate) {
         if(!(typeof preferred_pay_rate === 'string' && preferred_pay_rate.length > 0))
             throw new EntityError('Preferred pay rate needs to be of type string and it cannot be empty or undefined.');
+
+        return true;
     }
 }
 

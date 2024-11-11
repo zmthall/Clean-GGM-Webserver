@@ -17,6 +17,8 @@ class PassengerInformation {
     validateMedicaidID(medicaid_id) {
         if(!(typeof medicaid_id === 'string' && medicaid_id.length >= 0))
             throw new EntityError('Medicaid ID must be of type string and it cannot be empty/undefined.');
+
+        return true;
     }
 }
 
@@ -34,6 +36,8 @@ class AppointmentInformation {
     validateNotes(notes) {
         if(!(typeof notes === 'string' && notes.length >= 0 && notes.length <= 1000))
             throw new EntityError('Notes need to be of type string and they need to be from 0 to 1000 characters.');
+
+        return true;
     }
 }
 

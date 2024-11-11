@@ -60,12 +60,12 @@ export class Message {
     constructor({from, to, cc = null, bcc = null, subject, text, html, attachments = null}) {
         if(emailValidation(from)) this.from = from;
         if(this.validateTo(to)) this.to = to;
-        if(this.validateCC(cc)) this.cc = cc;
-        if(this.validateBCC(bcc)) this.bcc = bcc;
+        if(cc & this.validateCC(cc)) this.cc = cc;
+        if(bcc && this.validateBCC(bcc)) this.bcc = bcc;
         if(this.validateSubject(subject)) this.subject = subject;
         if(this.validateText(text)) this.text = text;
         if(this.validateHTML(html)) this.html = html;
-        if(this.validateAttachments(attachments)) this.attachments = attachments;
+        if(attachments && this.validateAttachments(attachments)) this.attachments = attachments;
     }
 
     validateTo(to) {
@@ -78,17 +78,15 @@ export class Message {
     validateCC(cc) {
         if(!(Array.isArray(cc) && cc.every(item => emailValidation(item))))
             throw new EntityError('CC needs to be an array of strings, all of the elements need to be of type string, they cannot be empty or undefined, they must be less than 100 characters in length, and they must be in proper email format.');
-
-        if(cc === null) return false;
-        else return true;
+        
+        return true;
     }
 
     validateBCC(bcc) {
         if(!(Array.isArray(bcc) && bcc.every(item => emailValidation(item))))
             throw new EntityError('BCC needs to be an array of strings, all of the elements need to be of type string, they cannot be empty or undefined, they must be less than 100 characters in length, and they must be in proper email format.');
 
-        if(bcc === null) return false;
-        else return true;
+        return true;
     }
 
     validateSubject(subject) {
@@ -113,7 +111,6 @@ export class Message {
     }
 
     validateAttachments(attachments) {
-        if(attachments === null) return false;
-        else return true;
+        // This isn't implemented yet as it isn't something that is useful at this moment.
     }
 }
