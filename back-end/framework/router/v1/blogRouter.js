@@ -18,7 +18,10 @@ const blogController = makeBlogController(useCases);
 const router = express.Router();
 
 // middleware imports
+import { errorHandler } from '../../middleware/error/errorHandling.js';
 
 router.post('/post', blogController.createPost);
+
+router.use(errorHandler);
 
 export default router;

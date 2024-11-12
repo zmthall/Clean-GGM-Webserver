@@ -1,5 +1,5 @@
 import { EntityError } from "../../utility/error-handling/EntityError.js";
-import { creationDateValidation, idValidation } from "../../utility/validation/entityValidation.js";
+import { creationDateValidation, idValidation, contentValidation } from "../../utility/validation/entityValidation.js";
 
 export class BlogPost {
     constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date = (new Date()).toISOString() }) {
