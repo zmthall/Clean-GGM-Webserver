@@ -4,7 +4,7 @@ import contactRouter from './contactRouter.js';
 import eventRouter from './eventRouter.js';
 // import userRouter from './userRouter.js'; // this router is not implemented yet
 
-export {
+export default {
     blogRouter,
     commandRouter,
     contactRouter,

@@ -1,7 +1,7 @@
-import { UseCaseError } from "../../utility/error-handling/useCaseError";
+import { UseCaseError } from "../../utility/error-handling/useCaseError.js";
 import { nanoid } from "nanoid";
 
-export function makeCreatePost({ repository }) {
+export function makeCreatePost(repository) {
     return async function createPost(newPostData) {
         newPostData ={
             ...newPostData,
@@ -11,6 +11,7 @@ export function makeCreatePost({ repository }) {
             const newPost = await repository.create(newPostData);
             return newPost;
         } catch (error) {
+            console.error(error.message);
             throw new UseCaseError({
                 message: `Failed to create post: [${ newPostData.id }]`,
                 status: error.status || 500,
