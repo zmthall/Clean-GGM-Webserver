@@ -1,12 +1,12 @@
-export async function successResponse(result) {
+export function successResponse(result) {
     return {
         success: true,
-        status: result.status || 200,
+        status: 200,
         data: result
     };
 }
 
-export async function errorResponse(error) {
+export function errorResponse(error) {
     return {
         success: false,
         status: error.status || 500,

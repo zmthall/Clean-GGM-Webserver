@@ -7,7 +7,7 @@ export async function repositoryResponseHandler(repositoryFunc) {
     } catch (error) {
         console.error(error.message);
         throw new RepositoryError({
-            message: 'Could not handle controller response.',
+            message: 'Failed to use repository function.',
             error
         });
     }

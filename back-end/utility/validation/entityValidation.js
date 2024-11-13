@@ -48,6 +48,11 @@ export function idValidation(id) {
     return true;
 }
 
+// Helper function to determine if a year is a leap year
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
+
 export function dateValidation(dateString) {
     // Regular expression to check format MM/DD/YYYY or MM-DD-YYYY
     const regex = /^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](\d{4})$/;

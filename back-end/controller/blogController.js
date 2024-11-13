@@ -1,4 +1,3 @@
-import { ControllerError } from "../utility/error-handling/controllerError.js";
 import { controllerResponseHandler } from "../utility/response-handling/controllerResponseHandler.js";
 
 export function makeBlogController({ createPost }) {
