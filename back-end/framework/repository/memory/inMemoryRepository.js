@@ -12,9 +12,9 @@ export const memoryRepo = {
     get: async () => {
 
     },
-    getAll: async () => {
-
-    },
+    getAll: async () => repositoryResponseHandler(async () => {
+        return repo;
+    }),
     update: async () => {
 
     },

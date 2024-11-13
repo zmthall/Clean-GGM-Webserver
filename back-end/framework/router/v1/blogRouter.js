@@ -7,7 +7,8 @@ import { memoryRepo } from '../../repository/memory/inMemoryRepository.js';
 import makeUseCases from '../../../use-case/blog/blogUseCases.js'
 
 const useCases = {
-    createPost: makeUseCases.makeCreatePost(memoryRepo)
+    createPost: makeUseCases.makeCreatePost(memoryRepo),
+    getAllPosts: makeUseCases.makeGetAllPosts(memoryRepo)
 }
 
 // Presentation layer
@@ -21,6 +22,7 @@ const router = express.Router();
 import { errorHandler } from '../../middleware/error/errorHandling.js';
 
 router.post('/post', blogController.createPost);
+router.get('/post', blogController.getAllPosts);
 
 router.use(errorHandler);
 

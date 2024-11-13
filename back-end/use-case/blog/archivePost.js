@@ -1,4 +1,4 @@
-export function makeArchivePost({ repository }) {
+export function makeArchivePost(repository) {
     return async function archivePost({ id }) {
         
     }

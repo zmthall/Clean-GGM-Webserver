@@ -6,7 +6,7 @@ export function makeCreatePost(repository) {
         newPostData ={
             ...newPostData,
             id: nanoid()
-        };
+        }; // Insert new nanoid() id into newPostData
         try {
             const newPost = await repository.create(newPostData);
             return newPost;
@@ -14,7 +14,6 @@ export function makeCreatePost(repository) {
             console.error(error.message);
             throw new UseCaseError({
                 message: `Failed to create post: [${ newPostData.id }]`,
-                status: error.status || 500,
                 error
             });
         }
