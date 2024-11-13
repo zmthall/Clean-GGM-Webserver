@@ -9,11 +9,16 @@ export const memoryRepo = {
         const newIDX = repo.push(new BlogPost(newData)) - 1
         return repo[newIDX];
     }),
-    get: async () => {
+    get: async (id) => repositoryResponseHandler(async () => {
+        const post = repo.find(post => id === post.id);
+        if(post) return post;
+        else throw new RepositoryError({ message: 'The Repository is empty.' });
 
-    },
+    }),
     getAll: async () => repositoryResponseHandler(async () => {
-        return repo;
+        console.log(repo.length)
+        if(repo.length > 0) return repo;
+        else throw new RepositoryError({ message: 'The Repository is empty.' });
     }),
     update: async () => {
 

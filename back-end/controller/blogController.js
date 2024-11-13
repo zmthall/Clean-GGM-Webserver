@@ -1,12 +1,16 @@
 import { controllerResponseHandler } from "../utility/response-handling/controllerResponseHandler.js";
 
-export function makeBlogController({ createPost, getAllPosts }) {
+export function makeBlogController({ createPost, getAllPosts, getPost }) {
     return {
         createPost: async (req, res) => controllerResponseHandler(async (req) => {
             return await createPost(req.body);
         }, req, res),
         getAllPosts: async (req, res) => controllerResponseHandler(async (req) => {
             return await getAllPosts();
+        }, req, res),
+        getPost: async (req, res) => controllerResponseHandler(async (req) => {
+            console.log(req.params)
+            return await getPost(req.params);
         }, req, res)
     }
 }
