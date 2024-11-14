@@ -50,3 +50,12 @@ export class BlogPost {
         }
     }
 }
+
+export class ArchivedBlogPost extends BlogPost {
+    constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date, archive_date = (new Date()).toISOString() }) {
+        super({ id, title, hook, content, image_url, tags, creation_date});
+        if(creationDateValidation(archive_date)) this.archive_date = archive_date;
+
+        Object.freeze(this);
+    }
+}
