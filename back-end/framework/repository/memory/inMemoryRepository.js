@@ -9,21 +9,29 @@ export const memoryRepo = {
         const newIDX = repo.push(new BlogPost(newData)) - 1
         return repo[newIDX];
     }),
-    get: async (id) => repositoryResponseHandler(async () => {
-        const post = repo.find(post => id === post.id);
-        if(post) return post;
-        else throw new RepositoryError({ message: 'The Repository is empty.' });
-
-    }),
     getAll: async () => repositoryResponseHandler(async () => {
-        console.log(repo.length)
         if(repo.length > 0) return repo;
         else throw new RepositoryError({ message: 'The Repository is empty.' });
     }),
-    update: async () => {
+    get: async (id) => repositoryResponseHandler(async () => {
+        const post = repo.find(post => id === post.id);
+        if(post) return post;
+        else throw new RepositoryError({ message: `The Repository post with id: ${id} could not be found.` });
+    }),
+    update: async (id , editData) => {
+        const editedPost = repo.map(post => {
+            if(post.id === id)
+                return post.edit(editData)
+            else throw new RepositoryError({ message: `The Repository post with id: ${id} could not be updated.` });
+        });
 
+        return editedPost;
     },
-    delete: async () => {
+    delete: async (id) => {
+        const deletedPost = repo[repo.findIndex(post => post.id === id)];
+        if(!(deletedPost))
+            throw new RepositoryError({ message: `The Repository post with id: ${id} coult not be deleted.`});
 
+        return deletedPost;
     }
 };

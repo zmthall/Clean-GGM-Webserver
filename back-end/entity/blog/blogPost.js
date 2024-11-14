@@ -27,4 +27,26 @@ export class BlogPost {
 
         return true;
     }
+
+    validateEditData(editData) {
+        if(!(Object.keys(editData).length > 0))
+            throw new EntityError('There is no new data assign.');
+
+        if(!(Object.keys(editData).every(key => key !== 'id' && key !== 'creation_date')))
+            throw new EntityError('To edit a Blog Post, your new post data cannot contain/change: id or creation_date.')
+
+        return true;
+    }
+
+    edit(newPostData) {
+        if(this.validateEditData(newPostData)) {
+            return {
+                ...this,
+                ...newPostData,
+                id: this.id,
+                creation_date: this.creation_date,
+                last_edited: (new Date()).toISOString()
+            };
+        }
+    }
 }
