@@ -50,6 +50,8 @@ export class RideRequest {
         if(idValidation(id)) this.id = id;
         if(this.validatePassengerInformation(passengerInformation)) this.passengerInformation = passengerInformation;
         if(this.validateAppointmentInformation(appointmentInformation)) this.appointmentInformation = appointmentInformation;
+
+        Object.freeze(this);
     }
 
     validatePassengerInformation(passengerInformation) {
