@@ -12,7 +12,10 @@ const useCases = {
     getEvent: makeUseCases.makeGetEvent(memoryRepo),
     updateEvent: makeUseCases.makeUpdateEvent(memoryRepo),
     deleteEvent: makeUseCases.makeDeleteEvent(memoryRepo),
-    archiveEvent: makeUseCases.makeArchiveEvent(memoryRepo)
+    archiveEvent: makeUseCases.makeArchiveEvent(memoryRepo),
+    getAllArchiveEvents: makeUseCases.makeGetAllArchiveEvents(memoryRepo),
+    getArchiveEvent: makeUseCases.makeGetArchiveEvent(memoryRepo),
+    deleteArchiveEvent: makeUseCases.makeDeleteArchiveEvent(memoryRepo)
 }
 
 // presentation layer imports
@@ -28,5 +31,8 @@ router.get('/post/:id', eventController.getEvent);
 router.put('/post/:id', eventController.updateEvent);
 router.delete('/post/:id', eventController.deleteEvent);
 router.post('/archive/:id', eventController.archiveEvent);
+router.get('/archive', eventController.getAllArchiveEvents);
+router.get('/archive/:id', eventController.getArchiveEvent);
+router.delete('/archive/:id', eventController.deleteArchiveEvent);
 
 export default router;

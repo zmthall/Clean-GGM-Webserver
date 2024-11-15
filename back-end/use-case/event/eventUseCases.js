@@ -4,6 +4,9 @@ import { makeGetEvent } from "./getEvent.js";
 import { makeUpdateEvent } from "./updateEvent.js";
 import { makeDeleteEvent } from "./deleteEvent.js";
 import { makeArchiveEvent } from "./archiveEvent.js";
+import { makeGetAllArchiveEvents } from "./getAllArchiveEvents.js";
+import { makeGetArchiveEvent } from "./getArchiveEvent.js";
+import { makeDeleteArchiveEvent } from "./deleteArchiveEvent.js";
 
 export default {
     makeCreateEvent,
@@ -11,5 +14,8 @@ export default {
     makeGetEvent,
     makeUpdateEvent,
     makeDeleteEvent,
-    makeArchiveEvent
+    makeArchiveEvent,
+    makeGetAllArchiveEvents,
+    makeGetArchiveEvent,
+    makeDeleteArchiveEvent
 };

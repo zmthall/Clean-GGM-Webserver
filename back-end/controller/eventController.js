@@ -1,6 +1,6 @@
 import { controllerResponseHandler } from "../utility/response-handling/controllerResponseHandler.js";
 
-export function makeEventController({ createEvent, getAllEvents, getEvent, updateEvent, deleteEvent, archiveEvent }) {
+export function makeEventController({ createEvent, getAllEvents, getEvent, updateEvent, deleteEvent, archiveEvent, getAllArchiveEvents, getArchiveEvent, deleteArchiveEvent }) {
     return {
         createEvent: async (req, res) => controllerResponseHandler(async (req) => {
             return await createEvent(req.body);
@@ -19,6 +19,15 @@ export function makeEventController({ createEvent, getAllEvents, getEvent, updat
         }, req, res),
         archiveEvent: async (req, res) => controllerResponseHandler(async (req) => {
             return await archiveEvent(req.params);
+        }, req, res),
+        getAllArchiveEvents: async (req, res) => controllerResponseHandler(async (req) => {
+            return await getAllArchiveEvents();
+        }, req, res),
+        getArchiveEvent: async (req, res) => controllerResponseHandler(async (req) => {
+            return await getArchiveEvent(req.params);
+        }, req, res),
+        deleteArchiveEvent: async (req, res) => controllerResponseHandler(async (req) => {
+            return await deleteArchiveEvent(req.params);
         }, req, res)
     }
 }
