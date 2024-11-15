@@ -44,5 +44,22 @@ export const memoryRepo = {
     archive: async (archiveData) => repositoryResponseHandler(async () => {
         const archiveIDX = archive.push(archiveData) - 1;
         return archive[archiveIDX];
+    }),
+    getAll_archive: async () => repositoryResponseHandler(async () => {
+        if(archive.length > 0) return archive;
+        else throw new RepositoryError({ message: 'The Repository is empty.' });
+    }),
+    get_archive: async (id) => repositoryResponseHandler(async () => {
+        const archivePost = archive.find(post => id === post.id);
+        if(archivePost) return archivePost;
+        else throw new RepositoryError({ message: `The Repository post with id: ${id} could not be found.` });
+    }),
+    delete_archive: async (id) => repositoryResponseHandler(async () => {
+        const archive_postIDX = archive.findIndex(post => post.id === id);
+        if(!(archive_postIDX >= 0))
+            throw new RepositoryError({ message: `The Repository post with id: ${id} could not be found.`});
+        
+        const deletedArchivePost = archive.splice(archive_postIDX, 1);
+        return deletedArchivePost[0];
     })
 };

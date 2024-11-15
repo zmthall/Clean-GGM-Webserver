@@ -12,7 +12,10 @@ const useCases = {
     getPost: makeUseCases.makeGetPost(memoryRepo),
     updatePost: makeUseCases.makeUpdatePost(memoryRepo),
     deletePost: makeUseCases.makeDeletePost(memoryRepo),
-    archivePost: makeUseCases.makeArchivePost(memoryRepo)
+    archivePost: makeUseCases.makeArchivePost(memoryRepo),
+    getAllArchivePosts: makeUseCases.makeGetAllArchivePosts(memoryRepo),
+    getArchivePost: makeUseCases.makeGetArchivePost(memoryRepo),
+    deleteArchivePost: makeUseCases.makeDeleteArchivePost(memoryRepo)
 };
 
 // Presentation layer
@@ -31,6 +34,9 @@ router.get('/post/:id', blogController.getPost);
 router.put('/post/:id', blogController.updatePost);
 router.delete('/post/:id', blogController.deletePost);
 router.post('/archive/:id', blogController.archivePost);
+router.get('/archive', blogController.getAllArchivePosts);
+router.get('/archive/:id', blogController.getArchivePost);
+router.delete('/archive/:id', blogController.deleteArchivePost)
 
 router.use(errorHandler);
 

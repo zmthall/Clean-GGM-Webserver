@@ -1,7 +1,6 @@
-import { arch } from "os";
 import { controllerResponseHandler } from "../utility/response-handling/controllerResponseHandler.js";
 
-export function makeBlogController({ createPost, getAllPosts, getPost, updatePost, deletePost, archivePost }) {
+export function makeBlogController({ createPost, getAllPosts, getPost, updatePost, deletePost, archivePost, getAllArchivePosts, getArchivePost, deleteArchivePost }) {
     return {
         createPost: async (req, res) => controllerResponseHandler(async (req) => {
             return await createPost(req.body);
@@ -20,6 +19,15 @@ export function makeBlogController({ createPost, getAllPosts, getPost, updatePos
         }, req, res),
         archivePost: async (req, res) => controllerResponseHandler(async (req) => {
             return await archivePost(req.params);
+        }, req, res),
+        getAllArchivePosts: async (req, res) => controllerResponseHandler(async (req) => {
+            return await getAllArchivePosts();
+        }, req, res),
+        getArchivePost: async (req, res) => controllerResponseHandler(async (req) => {
+            return await getArchivePost(req.params);
+        }, req, res),
+        deleteArchivePost: async(req, res) => controllerResponseHandler(async (req) => {
+            return await deleteArchivePost(req.params);
         }, req, res)
     }
 }
