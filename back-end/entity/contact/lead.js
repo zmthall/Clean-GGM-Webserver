@@ -3,7 +3,7 @@ import { firstNameValidation, lastNameValidation, emailValidation, phoneNumberVa
 import { EntityError } from "../../utility/error-handling/EntityError.js";
 
 export class Lead {
-    constructor(first_name, last_name, email = null, phone_number = null) {
+    constructor({ first_name, last_name, email = null, phone_number = null }) {
         if(firstNameValidation(first_name)) this.first_name = first_name;
         if(lastNameValidation(last_name)) this.last_name = last_name;
         if(emailValidation(email)) this.email = email;
