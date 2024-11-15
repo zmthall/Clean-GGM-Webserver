@@ -32,6 +32,8 @@ class AppointmentInformation {
         if(addressValidation(pickup_address)) this.pickup_address = pickup_address;
         if(addressValidation(dropoff_address)) this.dropoff_address = dropoff_address;
         if(this.validateNotes(notes)) this.notes = notes;
+
+        Object.freeze(this);
     }
 
     // Notes need to be of type string and they need to be between 0 and 1000 characters.
@@ -58,7 +60,7 @@ export class RideRequest {
     }
 
     validateAppointmentInformation(appointmentInformation) {
-        if(!(appointmentInformation instanceof PassengerInformation))
+        if(!(appointmentInformation instanceof AppointmentInformation))
             throw new EntityError('Appointment information must be an instance of PassengerInformation Entity.');
 
         return true;
