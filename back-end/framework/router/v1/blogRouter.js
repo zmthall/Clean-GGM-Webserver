@@ -4,14 +4,15 @@ import express from 'express';
 import { memoryRepo } from '../../repository/memory/inMemoryRepository.js';
 
 // Application layer improts
-import makeUseCases from '../../../use-case/blog/blogUseCases.js'
+import makeUseCases from '../../../use-case/blog/blogUseCases.js';
 
 const useCases = {
     createPost: makeUseCases.makeCreatePost(memoryRepo),
     getAllPosts: makeUseCases.makeGetAllPosts(memoryRepo),
     getPost: makeUseCases.makeGetPost(memoryRepo),
     updatePost: makeUseCases.makeUpdatePost(memoryRepo),
-    deletePost: makeUseCases.makeDeletePost(memoryRepo)
+    deletePost: makeUseCases.makeDeletePost(memoryRepo),
+    archivePost: makeUseCases.makeArchivePost(memoryRepo)
 };
 
 // Presentation layer
@@ -28,7 +29,8 @@ router.post('/post', blogController.createPost);
 router.get('/post', blogController.getAllPosts);
 router.get('/post/:id', blogController.getPost);
 router.put('/post/:id', blogController.updatePost);
-router.delete('/post/:id', blogController.deletePost)
+router.delete('/post/:id', blogController.deletePost);
+router.post('/archive/:id', blogController.archivePost);
 
 router.use(errorHandler);
 
