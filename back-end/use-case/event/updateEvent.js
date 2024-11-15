@@ -3,9 +3,9 @@ import { UseCaseError } from "../../utility/error-handling/useCaseError.js";
 export function makeUpdateEvent(repository) {
     return async function updateEvent({ id }, newEventData) {
         try {
-            const event = await repository.update(id, newEventData);
-            console.log(event)
-            return event;
+            const editedEvent = await repository.update(id, newEventData);
+        
+            return editedEvent;
         } catch (error) {
             console.error(error.message);
             throw new UseCaseError({

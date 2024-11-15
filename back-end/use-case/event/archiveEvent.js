@@ -6,6 +6,7 @@ export function makeArchiveEvent(repository) {
         try {
             const event = await repository.delete(id);
             const archivedEvent = await repository.archive(new ArchivedEvent(event));
+            
             return archivedEvent;
         } catch (error) {
             console.error(error.message);

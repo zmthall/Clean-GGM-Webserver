@@ -3,8 +3,8 @@ import { UseCaseError } from "../../utility/error-handling/useCaseError.js";
 export function makeDeleteEvent(repository) {
     return async function deleteEvent({ id }) {
         try {
-            const event = await repository.delete(id);
-            return event;
+            const deletedEvent = await repository.delete(id);
+            return deletedEvent;
         } catch (error) {
             console.error(error.message);
             throw new UseCaseError({
