@@ -1,5 +1,5 @@
 import { EntityError } from "../../utility/error-handling/EntityError.js";
-import { addressValidation, contentValidation, dateValidation } from "../../utility/validation/entityValidation";
+import { idValidation, addressValidation, dateValidation, contentValidation, creationDateValidation } from "../../utility/validation/entityValidation.js";
 
 
 function validateName(name) {
@@ -9,15 +9,16 @@ function validateName(name) {
     return true;
 }
 
-class Location {
-    constructor(name, address) {
+export class Location {
+    constructor({ name, address }) {
         if(validateName(name)) this.name = name;
-        if(addressValidation(address)) this.addres = address;
+        if(addressValidation(address)) this.address = address;
     }
 }
 
 export class Event {
-    constructor(name, location, date, description, url) {
+    constructor({ id, name, location, date, description, url }) {
+        if(idValidation(id)) this.id = id;
         if(validateName(name)) this.name = name;
         if(this.validateLocation(location)) this.location = location;
         if(dateValidation(date)) this.date = date;
@@ -39,4 +40,38 @@ export class Event {
         return true;
     }
 
+    validateEditData(editData) {
+        if(!(Object.keys(editData).length > 0))
+            throw new EntityError('There is no new data assign.');
+
+        if(!(Object.keys(editData).every(key => key !== 'id')))
+            throw new EntityError('To edit a Blog Post, your new post data cannot contain/change: id or creation_date.')
+
+        return true;
+    }
+
+    edit(newEventData) {
+        if(this.validateEditData(newEventData)) {
+            newEventData.location = new Location({
+                ...this.location,
+                ...newEventData.location
+            });
+
+            const editedEvent = new Event({
+                ...this,
+                ...newEventData,
+                id: this.id
+            });
+
+            return editedEvent;
+        }
+    }
+
+}
+
+export class ArchivedEvent extends Event {
+    constructor({ id, name, location, date, description, url, archived_date = (new Date()).toISOString() }) {
+        super({ id, name, location, date, description, url });
+        if(creationDateValidation(archived_date)) this.archived_date = archived_date;
+    }
 }

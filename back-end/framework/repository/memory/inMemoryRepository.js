@@ -23,7 +23,13 @@ export const memoryRepo = {
             if(post.id === id)
                 return post.edit(editData);
             else throw new RepositoryError({ message: `The Repository post with id: ${id} could not be updated.` });
-        });
+        })[0];
+
+        if(!(editedPost))
+            throw new RepositoryError({ message: `Failed to edit post with id: ${id}` })
+
+        const postIDX = repo.findIndex(post => post.id === id);
+        repo[postIDX] = editedPost;
 
         return editedPost;
     }),

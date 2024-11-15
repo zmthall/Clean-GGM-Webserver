@@ -10,6 +10,7 @@ let server;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/blog', routers.blogRouter);
+app.use('/event', routers.eventRouter);
 
 function startServer(port) {
     return new Promise((resolve, reject) => {
