@@ -1,4 +1,3 @@
-import { ArchivedBlogPost, BlogPost } from "../../../entity/blog/blogPost.js";
 import { RepositoryError } from "../../../utility/error-handling/frameworkError.js";
 import { repositoryResponseHandler } from "../../../utility/response-handling/repositoryResponseHandler.js";
 
@@ -7,7 +6,7 @@ const archive = [];
 
 export const memoryRepo = {
     create: async (newData) => repositoryResponseHandler(async () => {
-        const newIDX = repo.push(new BlogPost(newData)) - 1;
+        const newIDX = repo.push(newData) - 1;
         return repo[newIDX];
     }),
     getAll: async () => repositoryResponseHandler(async () => {
@@ -36,9 +35,8 @@ export const memoryRepo = {
         const deletedPost = repo.splice(postIDX, 1);
         return deletedPost[0];
     }),
-    archive: async (post) => repositoryResponseHandler(async () => {
-        console.log(post)
-        const archiveIDX = archive.push(new ArchivedBlogPost(post)) - 1;
+    archive: async (archiveData) => repositoryResponseHandler(async () => {
+        const archiveIDX = archive.push(archiveData) - 1;
         return archive[archiveIDX];
     })
 };
