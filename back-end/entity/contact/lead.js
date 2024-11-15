@@ -10,6 +10,8 @@ export class Lead {
         if(phoneNumberValidation(phone_number)) this.phone_number = phone_number;
 
         this.validateRequired(email, phone_number);
+
+        Object.freeze(this);
     }
 
     validateRequired(email, phone_number) {

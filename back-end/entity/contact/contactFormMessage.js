@@ -12,6 +12,8 @@ export class ContactFormMessage {
         if(this.validateMessage(message)) this.message = message;
 
         this.keys = Object.keys(this);
+
+        Object.freeze(this);
     }
 
     // Reason must be a string and it cannot be empty.

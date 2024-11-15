@@ -12,6 +12,8 @@ export class File {
         if(this.isString(mimetype)) this.mimetype = mimetype;
         if(this.validateBuffer(buffer)) this.buffer = buffer;
         if(this.validateSize(size)) this.size = size;
+
+        Object.freeze(this);
     }
 
     getFileExtension(filename) {

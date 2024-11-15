@@ -11,6 +11,8 @@ class PassengerInformation {
         if(phoneNumberValidation(phone_number)) this.phone_number = phone_number;
         if(emailValidation(email)) this.email = email;
         if(this.validateMedicaidID(medicaid_id)) this.medicaid_id = medicaid_id; 
+
+        Object.freeze(this);
     }
 
     // Medicaid ID must be of type string and it cannot be empty/undefined.

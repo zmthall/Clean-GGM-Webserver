@@ -66,6 +66,8 @@ export class Message {
         if(this.validateText(text)) this.text = text;
         if(this.validateHTML(html)) this.html = html;
         if(attachments && this.validateAttachments(attachments)) this.attachments = attachments;
+
+        Object.freeze(this);
     }
 
     validateTo(to) {

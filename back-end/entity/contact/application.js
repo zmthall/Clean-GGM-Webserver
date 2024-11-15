@@ -12,6 +12,8 @@ class PersonalInformation {
             this.us_citizen = us_citizen;
             this.been_charged_felony = been_charged_felony;
         }
+
+        Object.freeze(this);
     }
 }
 
@@ -29,6 +31,8 @@ class DriverInformation {
 
         if(fileValidation(mvr, ['pdf'])) this.mvr = mvr;
         if(fileValidation(drivers_license, ['jpg', 'jpeg', 'png', 'pdf'])) this.drivers_license = drivers_license;
+
+        Object.freeze(this);
     }
 }
 
@@ -44,6 +48,8 @@ class WorkInformation {
         if(this.validatePreferredPayRate(preferred_pay_rate)) this.preferred_pay_rate = preferred_pay_rate;
         if(dateValidation(available_start_date)) this.available_start_date = available_start_date;
         if(fileValidation(resume)) this.resume = resume;
+
+        Object.freeze(this);
     }
 
     validateHeardAboutFrom(heard_about_from) {
@@ -67,6 +73,8 @@ export class Application {
         if(this.validatePersonalInformation(personalInformation)) this.personalInformation = personalInformation;
         if(driverInformation && this.validateDriverInformation(driverInformation)) this.driverInformation = driverInformation;
         if(this.validateWorkInformation(workInformation)) this.workInformation = workInformation;
+
+        Object.freeze(this);
     }
 
     validatePosition(position) {
