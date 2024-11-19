@@ -34,7 +34,7 @@ export function firstNameValidation(first_name) {
 
 // Last name must be a string and it cannot be empty/undefined and must be less than 50 characters.
 export function lastNameValidation(last_name) {
-    if(!(typeof last_name === 'string' && reason !== undefined && last_name.length !== 0 && last_name.length <= 50)) 
+    if(!(typeof last_name === 'string' && last_name !== undefined && last_name.length !== 0 && last_name.length <= 50)) 
         throw new EntityError('Last Name needs to be of type string, it cannot be empty or undefined, and it must be less than 50 characters.');
 
     return true;

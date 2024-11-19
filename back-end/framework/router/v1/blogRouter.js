@@ -1,7 +1,10 @@
 import express from 'express';
 
 // Infrastructure layer imports
-import { memoryRepo } from '../../repository/memory/inMemoryRepository.js';
+import { makeInMemoryRepo } from '../../repository/memory/inMemoryRepository.js';
+// import { memoryRepo } from '../../repository/memory/inMemoryRepository.js';
+
+const memoryRepo = makeInMemoryRepo('blog');
 
 // Application layer improts
 import makeUseCases from '../../../use-case/blog/blogUseCases.js';
@@ -23,10 +26,11 @@ import { makeBlogController } from '../../../controller/blogController.js';
 
 const blogController = makeBlogController(useCases);
 
-const router = express.Router();
-
 // middleware imports
 import { errorHandler } from '../../middleware/error/errorHandling.js';
+
+// Microservice routing
+const router = express.Router();
 
 router.post('/post', blogController.createPost);
 router.get('/post', blogController.getAllPosts);
