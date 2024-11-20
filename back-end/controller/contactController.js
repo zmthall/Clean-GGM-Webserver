@@ -7,6 +7,9 @@ export function makeContactController({ createLead, getAllLeads, sendMessage, su
         }, req, res),
         getAllLeads: async (req, res) => controllerResponseHandler(async (req) => {
             return await getAllLeads();
+        }, req, res),
+        sendMessage: async (req, res) => controllerResponseHandler(async (req) => {
+            return await sendMessage(req.body);
         }, req, res)
     }
 }

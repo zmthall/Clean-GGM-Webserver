@@ -1,4 +1,4 @@
-import { UtilityError } from "../error-handling/utilityError.js";
+import { UtilityError } from "../../../back-end/utility/error-handling/utilityError.js";
 import axios from "axios";
 import 'dotenv/config';
 

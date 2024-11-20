@@ -12,6 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/blog', routers.blogRouter);
 app.use('/event', routers.eventRouter);
 app.use('/contact', routers.contactRouter);
+app.use('/page', (req, res) => {
+    res.send('testing');
+})
 
 function startServer(port) {
     return new Promise((resolve, reject) => {

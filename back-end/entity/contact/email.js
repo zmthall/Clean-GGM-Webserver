@@ -56,11 +56,11 @@ import { emailValidation } from "../../utility/validation/entityValidation.js";
 //     ]
 // }
 
-export class Message {
+export class Email {
     constructor({from, to, cc = null, bcc = null, subject, text, html, attachments = null}) {
         if(emailValidation(from)) this.from = from;
         if(this.validateTo(to)) this.to = to;
-        if(cc & this.validateCC(cc)) this.cc = cc;
+        if(cc && this.validateCC(cc)) this.cc = cc;
         if(bcc && this.validateBCC(bcc)) this.bcc = bcc;
         if(this.validateSubject(subject)) this.subject = subject;
         if(this.validateText(text)) this.text = text;
