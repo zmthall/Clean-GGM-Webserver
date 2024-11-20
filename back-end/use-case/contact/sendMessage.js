@@ -6,7 +6,7 @@ export function makeSendMessage(messageService) {
         try {
             const email = new Email(messageData);
             if(email)
-                return messageService.sendEmail(email)
+                return messageService.sendEmail(email);
             else throw new UseCaseError({ message: 'Failed to place message data into an email.' });
         } catch (error) {
             console.error(error.message);
