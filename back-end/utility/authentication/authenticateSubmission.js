@@ -1,6 +1,6 @@
+import { UtilityError } from "../error-handling/UtilityError.js";
 import axios from "axios";
 import 'dotenv/config';
-import { UtilityError } from "../error-handling/utilityError.js";
 
 export async function authenticateSubmission(responseToken) {
     if(responseToken) {

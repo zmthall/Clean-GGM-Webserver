@@ -1,4 +1,4 @@
-import { ServiceError } from '../../../utility/error-handling/frameworkError';
+import { ServiceError } from '../../../utility/error-handling/frameworkError.js';
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
 
