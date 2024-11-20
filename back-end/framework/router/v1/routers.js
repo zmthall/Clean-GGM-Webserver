@@ -8,5 +8,6 @@ export default {
     blogRouter,
     commandRouter,
     contactRouter,
-    eventRouter
+    eventRouter,
+    // userRouter // this is not implemented yet for export
 };
