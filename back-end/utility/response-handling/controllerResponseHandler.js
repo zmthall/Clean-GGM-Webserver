@@ -1,4 +1,3 @@
-import { ControllerError } from "../error-handling/controllerError.js";
 import { errorResponse, successResponse } from "./responses.js";
 
 export async function controllerResponseHandler(controllerFunc, req, res) {
