@@ -58,7 +58,12 @@ import { emailValidation } from "../../utility/validation/entityValidation.js";
 
 export class Email {
     constructor({from, to, cc = null, bcc = null, subject, text, html, attachments = null}) {
-        if(emailValidation(from)) this.from = from;
+        const splitFrom = from.split(/<|>/)
+        if(splitFrom.length > 1) {
+            if(emailValidation(splitFrom[1])) this.from = from;
+        } else {
+            if(emailValidation(from)) this.from = from;
+        }
         if(this.validateTo(to)) this.to = to;
         if(cc && this.validateCC(cc)) this.cc = cc;
         if(bcc && this.validateBCC(bcc)) this.bcc = bcc;

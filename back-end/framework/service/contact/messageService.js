@@ -1,27 +1,37 @@
 import { ServiceError } from '../../../utility/error-handling/frameworkError.js';
 import nodemailer from 'nodemailer';
+import { google } from 'googleapis';
 import 'dotenv/config';
+
+const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
+oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 export const messageService = {
     sendEmail: async (email) => {
-        const transporter = nodemailer.createTransport({
+        const accessToken = oAuth2Client.getAccessToken();
+
+        const transport = nodemailer.createTransport({
             service: 'gmail',
-            secure: true, //ssl
+            secure: false,
             auth: {
-                user: process.env.EMAIL_USERNAME,
-                pass: process.env.EMAIL_PASSWORD
+                type: 'oauth2',
+                user: process.env.EMAIL_USER,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN,
+                accessToken: accessToken
             },
             tls: {
                 rejectUnauthorized: false
             }
-        });
-    
+        })
+
         try {
-            const sendMessageResponse = await transporter.sendMail(email);
-            transporter.close();
+            const sendMessageResponse = await transport.sendMail(email);
+            transport.close();
             return sendMessageResponse;
         } catch (error) {
-            transporter.close();
+            transport.close();
             console.error(error);
             throw new ServiceError({ message: 'Failed to send email.', error });
         }
