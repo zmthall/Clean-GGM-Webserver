@@ -36,25 +36,18 @@ export const makeInMemoryRepo = (context) => {
             else throw new RepositoryError({ message: `The Repository post with id: ${id} could not be found.` });
         }),
         update: async (id , editData) => repositoryResponseHandler(async () => {
-            if(!editData || Object.keys(editData).length === 0)
-               throw new RepositoryError({ message: `There is no new data to add.`})
             const editedPost = repo.map(post => {
-                if(post.id === id) {
-                    post = {
-                        ...post,
-                        ...editData
-                    }
-
-                    return post;
-                }   
+                if(post.id === id)
+                    return post.edit(editData);
+                else throw new RepositoryError({ message: `The Repository post with id: ${id} could not be updated.` });
             })[0];
-
+    
             if(!(editedPost))
                 throw new RepositoryError({ message: `Failed to edit post with id: ${id}` })
     
             const postIDX = repo.findIndex(post => post.id === id);
             repo[postIDX] = editedPost;
-
+    
             return editedPost;
         }),
         delete: async (id) => repositoryResponseHandler(async () => {
