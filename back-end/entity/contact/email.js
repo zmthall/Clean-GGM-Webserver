@@ -57,7 +57,7 @@ import { emailValidation } from "../../utility/validation/entityValidation.js";
 // }
 
 export class Email {
-    constructor({from, to, cc = null, bcc = null, subject, text, html, attachments = null}) {
+    constructor({from, to, cc = null, bcc = null, subject, text, html = null, attachments = null}) {
         const splitFrom = from.split(/<|>/)
         if(splitFrom.length > 1) {
             if(emailValidation(splitFrom[1])) this.from = from;
@@ -69,7 +69,7 @@ export class Email {
         if(bcc && this.validateBCC(bcc)) this.bcc = bcc;
         if(this.validateSubject(subject)) this.subject = subject;
         if(this.validateText(text)) this.text = text;
-        if(this.validateHTML(html)) this.html = html;
+        if(html && this.validateHTML(html)) this.html = html;
         if(attachments && this.validateAttachments(attachments)) this.attachments = attachments;
 
         Object.freeze(this);
