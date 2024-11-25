@@ -2,7 +2,7 @@ import { EntityError } from "../../utility/error-handling/EntityError.js";
 import { creationDateValidation, idValidation, contentValidation } from "../../utility/validation/entityValidation.js";
 
 export class BlogPost {
-    constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date = (new Date()).toISOString() }, last_edited = null) {
+    constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date = (new Date()).toISOString(), last_edited = null }) {
         if(idValidation(id)) this.id = id;
         if(contentValidation(title, 'Blog Post Title', 5, 100)) this.title = title; // validating the title where the length is from 5 to 100 characters
         if(hook && contentValidation(hook, 'Blog Post Hook', 1, 500)) this.hook = hook; // validating the hook where the length is from 1 to 500 characters.
@@ -35,7 +35,7 @@ export class BlogPost {
         if(!(Object.keys(editData).length > 0))
             throw new EntityError('Edit data must contain at least one valid field.');
 
-        if(!(Object.keys(editData).some(key => restrictedFields.includes(key))))
+        if(Object.keys(editData).some(key => restrictedFields.includes(key)))
             throw new EntityError(`Fields ${restrictedFields.join(', ')} cannot be modified.`);
 
         return true;
@@ -50,7 +50,7 @@ export class BlogPost {
                 creation_date: this.creation_date,
                 last_edited: (new Date()).toISOString()
             };
-            
+
             return new BlogPost(updatedData);
         }
     }
