@@ -1,15 +1,18 @@
 import { UseCaseError } from "../../utility/error-handling/useCaseError.js";
-import { BlogPost } from "../../entity/blog/blogPost.js";
+import { blogPostValidation } from "../../entity/blog/blogPost.js";
 import { nanoid } from "nanoid";
 
 export function makeCreatePost(repository) {
     return async function createPost(newPostData) {
-        newPostData ={
-            ...newPostData,
-            id: nanoid()
-        }; // Insert new nanoid() id into newPostData
         try {
-            const newPost = await repository.create(new BlogPost(newPostData));
+            let result = await blogPostValidation(newPostData);
+            result = {
+                id: nanoid(),
+                ...result,
+                creation_date: (new Date()).toISOString()
+            }
+
+            const newPost = await repository.create(result);
             return newPost;
         } catch (error) {
             console.error(error.message);

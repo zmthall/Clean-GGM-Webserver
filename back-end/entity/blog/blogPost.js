@@ -1,61 +1,41 @@
-import { EntityError } from "../../utility/error-handling/EntityError.js";
-import { creationDateValidation, idValidation, contentValidation } from "../../utility/validation/entityValidation.js";
+import { schemaValidation } from "../../utility/validation/schemaValidation.js";
+import Joi from "joi";
 
-export class BlogPost {
-    constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date = (new Date()).toISOString() }) {
-        if(idValidation(id)) this.id = id;
-        if(contentValidation(title, 'Blog Post Title', 1, 100)) this.title = title;
-        if(hook && contentValidation(hook, 'Blog Post Hook', 1, 500)) this.hook = hook;
-        if(contentValidation(content, 'Blog Post Content', 1, 10000)) this.content = content;
-        if(image_url && this.validateImageURL(image_url)) this.image_url = image_url;
-        if(tags && this.validateTags(tags)) this.tags = tags;
-        if(creationDateValidation(creation_date)) this.creation_date = creation_date;
-    }
+const blogPostSchema = {
+    title: Joi.string().min(5).max(100).required(), 
+    hook: Joi.string().min(1).max(500), 
+    content: Joi.string().min(500).max(10000).required(), 
+    image_uri: Joi.string().uri(), 
+    tags: Joi.array().items(Joi.string().min(3).max(10)).length(10)
+};
 
-    // Image URL needs to be a URL class. Only 1 image allowed per post.
-    validateImageURL(image_url) {
-        if(!(image_url instanceof URL))
-            throw new EntityError('Image URL must be an instance of the URL class.');
-
-        return true;
-    }
-
-    // Tags need to be an array with all elements being of type string that cannot be empty or undefined.
-    validateTags(tags) {
-        if(!(Array.isArray(tags) && tags.every(tag => typeof tag === 'string' && tag.length > 0)))
-            throw new EntityError('Tags needs to be an array. All elements need to be of type string and cannot be empty or undefined.');
-
-        return true;
-    }
-
-    validateEditData(editData) {
-        if(!(Object.keys(editData).length > 0))
-            throw new EntityError('There is no new data assign.');
-
-        if(!(Object.keys(editData).every(key => key !== 'id' && key !== 'creation_date')))
-            throw new EntityError('To edit a Blog Post, your new post data cannot contain/change: id or creation_date.')
-
-        return true;
-    }
-
-    edit(newPostData) {
-        if(this.validateEditData(newPostData)) {
-            return {
-                ...this,
-                ...newPostData,
-                id: this.id,
-                creation_date: this.creation_date,
-                last_edited: (new Date()).toISOString()
-            };
-        }
-    }
+export async function blogPostValidation(data) {
+    return schemaValidation(data, Joi.object(blogPostSchema));
 }
 
-export class ArchivedBlogPost extends BlogPost {
-    constructor({ id, title, hook = null, content, image_url = null, tags = null, creation_date, archive_date = (new Date()).toISOString() }) {
-        super({ id, title, hook, content, image_url, tags, creation_date});
-        if(creationDateValidation(archive_date)) this.archive_date = archive_date;
+const editBlogPostSchema = {
+    title: Joi.string().min(5).max(100), 
+    hook: Joi.string().min(1).max(500), 
+    content: Joi.string().min(500).max(10000), 
+    image_uri: Joi.string().uri(), 
+    tags: Joi.array().items(Joi.string().min(3).max(10)).length(10),
+    edited_date: Joi.string().isoDate().required()
+};
 
-        Object.freeze(this);
-    }
+export async function editBlogPostValidation(data) {
+    return schemaValidation(data, Joi.object(editBlogPostSchema));
+}
+
+const archivedBlogPostSchema = {
+    id: Joi.string().pattern(/^[A-Za-z0-9_-]{21}$/, 'Nanoid').required()
+    .messages({ 
+        'string.pattern.base': '"id" must be a valid Nanoid (21 characters, alphanumeric with "-" or "_")' 
+    }),
+    ...blogPostSchema,
+    creation_date: Joi.string().isoDate().required(),
+    archive_date: Joi.string().isoDate().required()
+}
+
+export async function archivedBlogPostValidation(data) {
+    return schemaValidation(data, Joi.object(archivedBlogPostSchema));
 }
