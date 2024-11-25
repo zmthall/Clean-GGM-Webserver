@@ -28,5 +28,5 @@ process.on('SIGINT', async () => {
 
 process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    // Optionally: process.exit(1); // Exit if you want to stop on unhandled rejections
+    // process.exit(1); // Exit if you want to stop on unhandled rejections
 });
