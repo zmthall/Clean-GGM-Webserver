@@ -1,0 +1,10 @@
+POST http://localhost:3000/contact/message
+Content-Type: application/json
+
+{
+    "from": "goldengatemanortransportation@gmail.com",
+    "to": ["zmt.ggm@gmail.com"],
+    "subject": "This is an email",
+    "text": "Message from: <FORM>\nThis is the text content of the email.\nMore text.",
+    "html": "<h2>Message from: <FORM></h2>\n<p>This is the text content of the email.</p>\n<p>More text.</p>" 
+}

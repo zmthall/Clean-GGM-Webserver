@@ -17,11 +17,12 @@ export class Location {
 }
 
 export class Event {
-    constructor({ id, name, location, date, description, url }) {
+    constructor({ id, name, location, startDate, endDate = null, description, url }) {
         if(idValidation(id)) this.id = id;
         if(validateName(name)) this.name = name;
         if(this.validateLocation(location)) this.location = location;
-        if(dateValidation(date)) this.date = date;
+        if(dateValidation(startDate)) this.startDate = startDate;
+        if(toDate && dateValidation(endDate)) this.endDate = endDate;
         if(contentValidation(description, 'Event Description', 1, 250)) this.description = description;
         if(this.validateURL(url)) this.url = url;
     }
